@@ -1,0 +1,6 @@
+@ApiNexus_HostAddress = http://localhost:5049
+
+GET {{ApiNexus_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
