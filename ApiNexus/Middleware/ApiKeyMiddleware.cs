@@ -15,6 +15,12 @@ namespace ApiNexus.Middleware
 
         public async Task InvokeAsync(HttpContext context, IConfiguration configuration)
         {
+            if (context.Request.Path.StartsWithSegments("/swagger") ||
+                context.Request.Path.StartsWithSegments("/health"))
+            {
+                await _next(context);
+                return;
+            }
             if (!context.Request.Headers.TryGetValue(APIKEY, out var extractedApiKey))
             {
                 context.Response.StatusCode = 401; // Unauthorized
